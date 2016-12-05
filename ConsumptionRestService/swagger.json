@@ -1,0 +1,425 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This API offers allows survey of electric consumption./n Made </br> by <a href='https://api.filrouge.com'>filrouge</a>",
+    "version": "1.0.0",
+    "title": "Consumption API",
+    "contact": {
+      "name": "API Team",
+      "url": "http://api.filrouge.com",
+      "email": "apiteam@filrouge.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "api.filrouge.com",
+  "basePath": "/consumption/v1",
+  "tags": [
+    {
+      "name": "Consumer",
+      "description": "Operations about consumers consumption and billing follow-up"
+    },
+    {
+      "name": "Block",
+      "description": "Operations about grid's block consumption follow-up"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/block/{blockId}": {
+      "get": {
+        "tags": [
+          "Block"
+        ],
+        "summary": "Returns the consumption of the targeted Block",
+        "operationId": "getPowerConsumptionByBlock",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "blockId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "peak|offpeak",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "hour|day|week|month|year",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "end date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Consumption"
+            }
+          }
+        }
+      }
+    },
+    "/consumer/{consumerId}": {
+      "get": {
+        "tags": [
+          "Consumer"
+        ],
+        "summary": "Returns the consumption of a consumer",
+        "operationId": "getPowerConsumptionByConsumerId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "consumerId",
+            "in": "path",
+            "description": "the consumer id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "peak|offpeak",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "hour|day|week|month|year",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "end date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Consumption"
+            }
+          },
+          "400": {
+            "description": "Invalid Request"
+          }
+        }
+      }
+    },
+    "/consumer/{consumerId}/appliance/{applianceId}": {
+      "get": {
+        "tags": [
+          "Consumer"
+        ],
+        "summary": "Returns the consumption By Consumer Appliance",
+        "operationId": "getPowerConsumptionByApplianceId",
+        "parameters": [
+          {
+            "name": "consumerId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "applianceId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "peak|offpeak",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "hour|day|week|month|year",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "end date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200"
+          }
+        }
+      }
+    },
+    "/consumer/{consumerId}/appliance/{applianceId}/bill": {
+      "get": {
+        "tags": [
+          "Consumer"
+        ],
+        "summary": "Returns the estimated bill amount for the Consumer Appliance",
+        "operationId": "computePowerConsumptionEstimatedBillByApplianceId",
+        "parameters": [
+          {
+            "name": "consumerId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "applianceId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "peak|offpeak",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "hour|day|week|month|year",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "end date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200"
+          }
+        }
+      }
+    },
+    "/consumer/{consumerId}/bill": {
+      "get": {
+        "tags": [
+          "Consumer"
+        ],
+        "summary": "Returns the estimated bill amount for the Consumer",
+        "description": "Returns the bill",
+        "operationId": "computePowerConsumptionEstimatedBillById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "consumerId",
+            "in": "path",
+            "description": "ID of consumer",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "peak|offpeak",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "hour|day|week|month|year",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "end date",
+            "required": false,
+            "type": "string",
+            "format": "datetime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Bill"
+            }
+          },
+          "400": {
+            "description": "Invalid Request"
+          },
+          "404": {
+            "description": "There is no such customer"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Bill": {
+      "type": "object",
+      "properties": {
+        "consumerid": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Consumer identification id"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string",
+          "format": "datetime",
+          "description": "Ending date of the time interval"
+        },
+        "start": {
+          "type": "string",
+          "format": "datetime",
+          "description": "Starting date of the time interval"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "Consumption": {
+      "type": "object",
+      "properties": {
+        "end": {
+          "type": "string",
+          "format": "datetime"
+        },
+        "start": {
+          "type": "string",
+          "format": "datetime"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "filter": {
+      "name": "filter",
+      "in": "query",
+      "description": "peak|offpeak",
+      "required": false,
+      "type": "string"
+    },
+    "period": {
+      "name": "period",
+      "in": "query",
+      "description": "hour|day|week|month|year",
+      "required": false,
+      "type": "string"
+    },
+    "from": {
+      "name": "from",
+      "in": "query",
+      "description": "start date",
+      "required": false,
+      "type": "string",
+      "format": "datetime"
+    },
+    "to": {
+      "name": "to",
+      "in": "query",
+      "description": "end date",
+      "required": false,
+      "type": "string",
+      "format": "datetime"
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about FilRouge",
+    "url": "http://filrouge.com/info"
+  }
+}
