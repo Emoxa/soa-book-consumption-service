@@ -1,4 +1,4 @@
-package com.filrouge.consumption.ws.rest.invoker;
+package com.filrouge.consumption;
 
 import org.wso2.msf4j.spring.MSF4JSpringApplication;
 

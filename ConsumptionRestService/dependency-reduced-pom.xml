@@ -69,7 +69,7 @@
     </dependency>
   </dependencies>
   <properties>
-    <microservice.mainClass>com.filrouge.consumption.ws.rest.invoker.Application</microservice.mainClass>
+      <microservice.mainClass>com.filrouge.consumption.Application</microservice.mainClass>
     <junit-version>4.8.1</junit-version>
   </properties>
 </project>
